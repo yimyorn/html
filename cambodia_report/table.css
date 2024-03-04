@@ -1,0 +1,32 @@
+table{
+    font-family: Cambodiatable2;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th{
+border: 2px solid #dddddd;
+text-align: left;
+padding: 7px;
+}
+tr:nth-child(even){
+    background-color: #dddddd;
+}
+.social-icons a {
+  display: inline-block;
+  margin-right: 10px; /* Adjust as needed */
+  color: #da1313; /* Adjust icon color */
+}
+
+.social-icons a:hover {
+  color: #14c43a; /* Adjust hover color */
+}
+
+  #footer {
+    clear: left;
+    width: 100%;
+    background: #ccc;
+    text-align: center;
+    padding: 20px 0; /* Adjust padding as needed */
+    color: black;/* Text color for the footer */
+    font-size: 20px;/* Adjust font size as needed */
+}
