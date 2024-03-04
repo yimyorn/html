@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODE</title>
+    <link rel="stylesheet " href="code.css">
+</head>
+<body>
+    <div class="main">
+        <div class="icon">
+            <h2 class="logo">
+            CODE 
+            </h2>
+                <div class="conten">
+                <pre>
+                // Moter Left connections
+               int enA = 13;
+               int in1 = 12;
+               int in2 = 11;
+                // Moter Right connections
+               int enB = 8;
+               int in3 = 10;
+               int in4 = 9;
+                // Line Tracking Sensor Left connections
+               int LineL = A1;
+               int L;
+                // Line Tracking Sensor Right connections
+               int LineR = A0;
+               int R;
+           
+                   void setup() {
+                // Set all the motors control pins to outputs
+               Serial.begin(115200);
+               pinMode(enA,OUTPUT);
+               pinMode(in1,OUTPUT);
+               pinMode(in2,OUTPUT);
+               pinMode(enB,OUTPUT);
+               pinMode(in3,OUTPUT);
+               pinMode(in4,OUTPUT);
+                // Set all the line tracking sensors pins to inputs
+               pinMode(LineL, INPUT);
+               pinMode(LineR, INPUT);
+               // Turn off motors - Initial state
+                stop();
+            }
+           
+                   void loop() {
+                // Read data from Line Tracking Sensor Left
+               L = analogRead(LineL);
+                // Read data from Line Tracking Sensor Right
+               R = analogRead(LineR);
+                // Show data on screen
+               Serial.print("Line Sensor Left: ");
+               Serial.println(L);
+               Serial.print("Line Sensor Right: ");
+               Serial.println(R);
+                // Condition to control the motors
+               if((L <= 100 && R <=100) || (L >= 500 && R >=500 )){
+               moveForward();
+               } else if(L <=100 && R >=500){
+                 turnRight();
+               } else if(L >=500 && R <=100){
+                 turnLeft();
+               } else{
+                 stop();
+               }
+                 delay(10);
+            }
+           
+                // Move motor to forward
+               void moveForward(){
+               analogWrite(enA, 190);//R
+               analogWrite(enB, 160);//L
+               digitalWrite(in1, HIGH);// in1 1 in2 0 forward R
+               digitalWrite(in2, LOW);
+               digitalWrite(in3, HIGH);// in3 1 in4 0 forward L
+               digitalWrite(in4, LOW);
+            }
+                // Stop the motor
+               void stop(){
+               digitalWrite(in1, LOW);// in1 1 in2 0 forward R
+               digitalWrite(in2, LOW);
+               digitalWrite(in3, LOW);// in3 1 in4 0 forward L
+               digitalWrite(in4, LOW);
+            }
+                // Move motor to turn left
+               void turnLeft(){
+               analogWrite(enA, 255);//R
+               analogWrite(enB, 120);//L
+               digitalWrite(in1, HIGH);// in1 1 in2 0 forward R
+               digitalWrite(in2, LOW);
+               digitalWrite(in3, LOW);// in3 1 in4 0 forward L
+               digitalWrite(in4, HIGH);
+            }
+                // Move motor to turn right
+               void turnRight(){
+               analogWrite(enA, 150);//R
+               analogWrite(enB, 255);//L
+               digitalWrite(in1, LOW);// in1 1 in2 0 forward R
+               digitalWrite(in2, HIGH);
+               digitalWrite(in3, HIGH);// in3 1 in4 0 forward L
+               digitalWrite(in4, LOW);
+            }
+                 </pre>
+               </div>
+          </div>
+    </div>
+  
+    
+</body>
+</html>
